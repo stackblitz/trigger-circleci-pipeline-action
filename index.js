@@ -13,7 +13,6 @@ import axios from "axios";
 startGroup("Preparing CircleCI Pipeline Trigger");
 const repoOrg = context.repo.owner;
 const repoName = context.repo.repo;
-const host = "circleci.com";
 info(`Org: ${repoOrg}`);
 info(`Repo: ${repoName}`);
 const ref = context.ref;
@@ -65,7 +64,7 @@ if (tag) {
   Object.assign(body, { branch });
 }
 
-const url = `https://${host}/api/v2/project/gh/${repoOrg}/${repoName}/pipeline`;
+const url = `https://circleci.com/api/v2/project/gh/${repoOrg}/${repoName}/pipeline`;
 
 info(`Triggering CircleCI Pipeline for ${repoOrg}/${repoName}`);
 info(`Triggering URL: ${url}`);
