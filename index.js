@@ -81,10 +81,10 @@ axios
   .then((response) => {
     startGroup("Successfully triggered CircleCI Pipeline");
     info(`CircleCI API Response: ${JSON.stringify(response.data)}`);
-    setOutput('id', response.data.id);
-    setOutput('number', response.data.number);
-    setOutput('state', response.data.state);
-    setOutput('created_at', response.data.created_at);
+    setOutput("id", response.data.id);
+    setOutput("number", response.data.number);
+    setOutput("state", response.data.state);
+    setOutput("created_at", response.data.created_at);
     endGroup();
   })
   .catch((error) => {

@@ -16490,7 +16490,6 @@ __nccwpck_require__.r(__webpack_exports__);
 (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.startGroup)("Preparing CircleCI Pipeline Trigger");
 const repoOrg = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.owner;
 const repoName = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.repo;
-const host = `${process.env.CCI_HOST}` || "circleci.com";
 (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(`Org: ${repoOrg}`);
 (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(`Repo: ${repoName}`);
 const ref = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref;
@@ -16542,7 +16541,7 @@ if (tag) {
   Object.assign(body, { branch });
 }
 
-const url = `https://${host}/api/v2/project/gh/${repoOrg}/${repoName}/pipeline`;
+const url = `https://circleci.com/api/v2/project/gh/${repoOrg}/${repoName}/pipeline`;
 
 (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(`Triggering CircleCI Pipeline for ${repoOrg}/${repoName}`);
 (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(`Triggering URL: ${url}`);
@@ -16558,6 +16557,10 @@ axios__WEBPACK_IMPORTED_MODULE_2___default().post(url, body, { headers: headers 
   .then((response) => {
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.startGroup)("Successfully triggered CircleCI Pipeline");
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(`CircleCI API Response: ${JSON.stringify(response.data)}`);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("id", response.data.id);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("number", response.data.number);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("state", response.data.state);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("created_at", response.data.created_at);
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.endGroup)();
   })
   .catch((error) => {
