@@ -13,7 +13,7 @@ import axios from "axios";
 startGroup("Preparing CircleCI Pipeline Trigger");
 const repoOrg = context.repo.owner;
 const repoName = context.repo.repo;
-const host = `${process.env.CCI_HOST}` || "circleci.com";
+const host = process.env.CCI_HOST || "circleci.com";
 info(`Org: ${repoOrg}`);
 info(`Repo: ${repoName}`);
 const ref = context.ref;
@@ -82,10 +82,10 @@ axios
   .then((response) => {
     startGroup("Successfully triggered CircleCI Pipeline");
     info(`CircleCI API Response: ${JSON.stringify(response.data)}`);
-    setOutput('id', response.data.id);
-    setOutput('number', response.data.number);
-    setOutput('state', response.data.state);
-    setOutput('created_at', response.data.created_at);
+    // setOutput('id', response.data.id);
+    // setOutput('number', response.data.number);
+    // setOutput('state', response.data.state);
+    // setOutput('created_at', response.data.created_at);
     endGroup();
   })
   .catch((error) => {
